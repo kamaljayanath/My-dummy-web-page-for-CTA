@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracked Dummy Page</title>
+
+    <!-- ChannelBoost Tracking Script -->
+    <script>
+    (function(w,d,s,u){
+        let j=d.createElement(s);
+        j.async=true;
+        j.src="https://assets.channelboost.com/scripts/cts.js?uid=" + u;
+        let f=d.getElementsByTagName(s)[0];
+        f.parentNode.insertBefore(j,f);
+    })(window,document,"script","e02fafeb-a06c-4759-9d5b-70cbe99fe180");
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+        }
+        button {
+            display: block;
+            width: 200px;
+            padding: 12px;
+            margin: 10px auto;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Welcome</h2>
+
+    <!-- Buttons with tracking -->
+    <button onclick="trackSignup()">Sign Up</button>
+    <button onclick="trackRegister()">Register</button>
+    <button onclick="trackDemo()">Demo</button>
+</div>
+
+<script>
+    // Ensure trackify exists before calling
+    function safeTrack(eventName) {
+        if (typeof trackify !== "undefined" && trackify.trackEvent) {
+            trackify.trackEvent(eventName);
+        } else {
+            console.warn("Tracking script not loaded yet:", eventName);
+        }
+    }
+
+    function trackSignup() {
+        safeTrack("signup_button"); // Sign Up Button Click
+        alert("Sign Up button clicked!");
+    }
+
+    function trackRegister() {
+        safeTrack("register_button"); // Register Button Click
+        alert("Register button clicked!");
+    }
+
+    function trackDemo() {
+        safeTrack("demo_button"); // Demo Button Click
+        alert("Demo button clicked!");
+    }
+</script>
+
+</body>
+</html>
