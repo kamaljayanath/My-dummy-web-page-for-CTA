@@ -51,13 +51,13 @@
 <div class="container">
     <h2>Welcome</h2>
 
-    <!-- Buttons -->
     <button onclick="trackSignup()">Sign Up</button>
     <button onclick="trackRegister()">Register</button>
     <button onclick="trackDemo()">Demo</button>
 </div>
 
 <script>
+    // Safe tracking wrapper
     function safeTrack(eventName) {
         if (typeof trackify !== "undefined" && trackify.trackEvent) {
             trackify.trackEvent(eventName);
@@ -67,18 +67,24 @@
     }
 
     function trackSignup() {
-        safeTrack("signup_button");
-        window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+        safeTrack("sign_up"); // ✅ corrected event name
+        setTimeout(() => {
+            window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+        }, 300);
     }
 
     function trackRegister() {
-        safeTrack("register_button");
-        window.open("https://www.youtube.com/watch?v=3JZ_D3ELwOQ", "_blank");
+        safeTrack("register"); // ✅ consistent naming
+        setTimeout(() => {
+            window.open("https://www.youtube.com/watch?v=3JZ_D3ELwOQ", "_blank");
+        }, 300);
     }
 
     function trackDemo() {
-        safeTrack("demo_button");
-        window.open("https://www.youtube.com/watch?v=l482T0yNkeo", "_blank");
+        safeTrack("demo"); // ✅ consistent naming
+        setTimeout(() => {
+            window.open("https://www.youtube.com/watch?v=l482T0yNkeo", "_blank");
+        }, 300);
     }
 </script>
 
