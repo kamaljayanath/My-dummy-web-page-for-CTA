@@ -51,14 +51,13 @@
 <div class="container">
     <h2>Welcome</h2>
 
-    <!-- Buttons with tracking -->
+    <!-- Buttons -->
     <button onclick="trackSignup()">Sign Up</button>
     <button onclick="trackRegister()">Register</button>
     <button onclick="trackDemo()">Demo</button>
 </div>
 
 <script>
-    // Ensure trackify exists before calling
     function safeTrack(eventName) {
         if (typeof trackify !== "undefined" && trackify.trackEvent) {
             trackify.trackEvent(eventName);
@@ -68,18 +67,18 @@
     }
 
     function trackSignup() {
-        safeTrack("signup_button"); // Sign Up Button Click
-        alert("Sign Up button clicked!");
+        safeTrack("signup_button");
+        window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
     }
 
     function trackRegister() {
-        safeTrack("register_button"); // Register Button Click
-        alert("Register button clicked!");
+        safeTrack("register_button");
+        window.open("https://www.youtube.com/watch?v=3JZ_D3ELwOQ", "_blank");
     }
 
     function trackDemo() {
-        safeTrack("demo_button"); // Demo Button Click
-        alert("Demo button clicked!");
+        safeTrack("demo_button");
+        window.open("https://www.youtube.com/watch?v=l482T0yNkeo", "_blank");
     }
 </script>
 
