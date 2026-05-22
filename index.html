@@ -18,11 +18,11 @@
     <!-- ChannelBoost Tracking Script -->
     <script>
     (function(w,d,s,u){
-        let j=d.createElement(s);
-        j.async=true;
-        j.src="https://assets.channelboost.com/scripts/cts.js?uid=" + u;
+        let j = d.createElement(s);
+        j.async = true;
+        j.src = "https://assets.channelboost.com/scripts/cts.js?uid=" + u;
 
-        let f=d.getElementsByTagName(s)[0];
+        let f = d.getElementsByTagName(s)[0];
         f.parentNode.insertBefore(j,f);
 
     })(window,document,"script","a733e81d-99c2-4195-8e2b-631d0159e860");
@@ -53,7 +53,6 @@
             border-radius: 6px;
             background-color: #007BFF;
             color: white;
-            transition: 0.3s;
         }
 
         button:hover {
@@ -78,22 +77,36 @@
     <button onclick="handleClick('demo_button', 'https://appventory.com/')">
         Book a Demo
     </button>
-
 </div>
 
 <script>
 function handleClick(eventName, url) {
 
-    if (typeof trackify !== "undefined") {
-        trackify.trackEvent(eventName);
-        console.log("Tracked:", eventName);
-    } else {
-        console.warn("trackify not loaded");
+    try {
+
+        // Fire tracking only if available
+        if (
+            typeof trackify !== "undefined" &&
+            typeof trackify.trackEvent === "function"
+        ) {
+
+            trackify.trackEvent(eventName);
+            console.log("Tracked:", eventName);
+
+        } else {
+
+            console.warn("trackify not ready");
+
+        }
+
+    } catch (err) {
+
+        console.error("Tracking error:", err);
+
     }
 
-    setTimeout(() => {
-        window.location.href = url;
-    }, 250);
+    // ALWAYS redirect
+    window.location.href = url;
 }
 </script>
 
