@@ -5,7 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Landing Page</title>
 
+    <!-- ChannelBoost User Data -->
+    <script>
+        window.channelBoostUser = {
+            email: "user@domain.com", // Mandatory
+            firstName: "John",
+            lastName: "Doe",
+            companyName: "JD Inc."
+        };
+    </script>
+
     <!-- ChannelBoost Tracking Script -->
+    <script>
+    (function(w,d,s,u){
+        let j = d.createElement(s);
+        j.async = true;
+
+        // Widget/Tracking Script
+        j.src = "https://assets.channelboost.com/scripts/embeddingwidget.js?uid=" + u;
+
+        let f = d.getElementsByTagName(s)[0];
+        f.parentNode.insertBefore(j,f);
+
+    })(window,document,"script","a733e81d-99c2-4195-8e2b-631d0159e860");
+    </script>
+
+    <!-- Existing CTS Tracking -->
     <script>
     (function(w,d,s,u){
         let j=d.createElement(s);
@@ -74,6 +99,7 @@
 
 <script>
 function handleClick(eventName, url) {
+
     // Ensure tracking fires
     if (typeof trackify !== "undefined") {
         trackify.trackEvent(eventName);
@@ -91,4 +117,3 @@ function handleClick(eventName, url) {
 
 </body>
 </html>
-
