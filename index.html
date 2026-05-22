@@ -5,26 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Landing Page</title>
 
-    <!-- ChannelBoost User Data -->
-    <script>
-        window.channelBoostUser = {
-            email: "user@domain.com",
-            firstName: "John",
-            lastName: "Doe",
-            companyName: "JD Inc."
-        };
-    </script>
-
     <!-- ChannelBoost Tracking Script -->
     <script>
     (function(w,d,s,u){
-        let j = d.createElement(s);
-        j.async = true;
-        j.src = "https://assets.channelboost.com/scripts/cts.js?uid=" + u;
-
-        let f = d.getElementsByTagName(s)[0];
+        let j=d.createElement(s);
+        j.async=true;
+        j.src="https://assets.channelboost.com/scripts/cts.js?uid=" + u;
+        let f=d.getElementsByTagName(s)[0];
         f.parentNode.insertBefore(j,f);
-
     })(window,document,"script","a733e81d-99c2-4195-8e2b-631d0159e860");
     </script>
 
@@ -53,6 +41,7 @@
             border-radius: 6px;
             background-color: #007BFF;
             color: white;
+            transition: 0.3s;
         }
 
         button:hover {
@@ -66,49 +55,40 @@
 <div class="container">
     <h2>Welcome</h2>
 
+    <!-- Sign Up -->
     <button onclick="handleClick('sign_up_button', 'https://my.channelboost.com/register')">
         Sign Up
     </button>
 
+    <!-- Login -->
     <button onclick="handleClick('login_button', 'https://my.channelboost.com/login')">
         Login
     </button>
 
-    <button onclick="handleClick('demo_button', 'https://appventory.com/')">
+    <!-- Book a Demo -->
+    <button onclick="handleClick('demo_button', 'https://appventory.com/#:~:text=Your%20Free%20Trial-,Schedule%20a%20Demo,-Intelligent%0ASystem%20Reviews')">
         Book a Demo
     </button>
+
 </div>
 
 <script>
 function handleClick(eventName, url) {
-
-    try {
-
-        // Fire tracking only if available
-        if (
-            typeof trackify !== "undefined" &&
-            typeof trackify.trackEvent === "function"
-        ) {
-
-            trackify.trackEvent(eventName);
-            console.log("Tracked:", eventName);
-
-        } else {
-
-            console.warn("trackify not ready");
-
-        }
-
-    } catch (err) {
-
-        console.error("Tracking error:", err);
-
+    // Ensure tracking fires
+    if (typeof trackify !== "undefined") {
+        trackify.trackEvent(eventName);
+        console.log("Tracked:", eventName);
+    } else {
+        console.warn("trackify not loaded");
     }
 
-    // ALWAYS redirect
-    window.location.href = url;
+    // Delay redirect to allow tracking request
+    setTimeout(() => {
+        window.location.href = url;
+    }, 250);
 }
 </script>
 
 </body>
 </html>
+
