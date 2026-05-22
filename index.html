@@ -7,13 +7,15 @@
 
     <!-- ChannelBoost Tracking Script -->
     <script>
-    (function(w,d,s,u){
-        let j=d.createElement(s);
-        j.async=true;
-        j.src="https://assets.channelboost.com/scripts/cts.js?uid=" + u;
-        let f=d.getElementsByTagName(s)[0];
-        f.parentNode.insertBefore(j,f);
-    })(window,document,"script","a733e81d-99c2-4195-8e2b-631d0159e860");
+    (function (w, d, s, u) {
+        let j = d.createElement(s);
+        j.async = true;
+        j.src = "https://assets.channelboost.com/scripts/embeddingwidget.js?uid=" + u;
+
+        let f = d.getElementsByTagName(s)[0];
+        f.parentNode.insertBefore(j, f);
+
+    })(window, document, "script", "a733e81d-99c2-4195-8e2b-631d0159e860");
     </script>
 
     <style>
@@ -73,8 +75,11 @@
 </div>
 
 <script>
+/**
+ * Track button click events
+ */
 function handleClick(eventName, url) {
-    // Ensure tracking fires
+
     if (typeof trackify !== "undefined") {
         trackify.trackEvent(eventName);
         console.log("Tracked:", eventName);
@@ -82,14 +87,48 @@ function handleClick(eventName, url) {
         console.warn("trackify not loaded");
     }
 
-    // Delay redirect to allow tracking request
+    // Delay redirect slightly so tracking can complete
     setTimeout(() => {
         window.location.href = url;
     }, 250);
 }
+
+
+/**
+ * Track referral lead submissions
+ * Call this function after a form submission
+ */
+function trackReferralLead(formData) {
+
+    if (typeof trackify !== "undefined") {
+
+        trackify.trackLead({
+            email: formData.email,
+            firstName: formData.firstName || "",
+            lastName: formData.lastName || "",
+            companyName: formData.companyName || ""
+        });
+
+        console.log("Referral lead tracked");
+
+    } else {
+        console.warn("trackify not loaded");
+    }
+}
+
+
+/*
+Example Usage:
+
+trackReferralLead({
+    email: "user@domain.com",
+    firstName: "John",
+    lastName: "Doe",
+    companyName: "JD Inc."
+});
+
+*/
 </script>
 
 </body>
 </html>
-
-Lochana
